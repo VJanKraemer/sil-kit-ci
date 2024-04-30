@@ -1,21 +1,21 @@
 ================================
 The Vector SIL Kit
 ================================
-.. |ReleaseBadge| image:: https://img.shields.io/github/v/release/vectorgrp/sil-kit.svg
-   :target: https://github.com/vectorgrp/sil-kit/releases
+.. |ReleaseBadge| image:: https://img.shields.io/github/v/release/vjankraemer/sil-kit.svg
+   :target: https://github.com/vjankraemer/sil-kit/releases
 .. |LicenseBadge| image:: https://img.shields.io/badge/license-MIT-blue.svg
-   :target: https://github.com/vectorgrp/sil-kit/blob/main/LICENSE
+   :target: https://github.com/vjankraemer/sil-kit/blob/main/LICENSE
 .. |DocsBadge| image:: https://img.shields.io/badge/documentation-html-blue.svg
    :target: https://vectorgrp.github.io/sil-kit-docs
 
-.. |AsanBadge| image:: https://github.com/vectorgrp/sil-kit/actions/workflows/linux-asan.yml/badge.svg
-   :target: https://github.com/vectorgrp/sil-kit/actions/workflows/linux-asan.yml
-.. |UbsanBadge| image:: https://github.com/vectorgrp/sil-kit/actions/workflows/linux-ubsan.yml/badge.svg
-   :target: https://github.com/vectorgrp/sil-kit/actions/workflows/linux-ubsan.yml
-.. |TsanBadge| image:: https://github.com/vectorgrp/sil-kit/actions/workflows/linux-tsan.yml/badge.svg
-   :target: https://github.com/vectorgrp/sil-kit/actions/workflows/linux-tsan.yml
-.. |WinBadge| image:: https://github.com/vectorgrp/sil-kit/actions/workflows/build-win.yml/badge.svg
-   :target: https://github.com/vectorgrp/sil-kit/actions/workflows/build-win.yml
+.. |AsanBadge| image:: https://github.com/vjankraemer/sil-kit-ci/actions/workflows/linux-asan.yml/badge.svg
+   :target: https://github.com/vjankraemer/sil-kit-ci/actions/workflows/linux-asan.yml
+.. |UbsanBadge| image:: https://github.com/vjankraemer/sil-kit-ci/actions/workflows/linux-ubsan.yml/badge.svg
+   :target: https://github.com/vjankraemer/sil-kit-ci/actions/workflows/linux-ubsan.yml
+.. |TsanBadge| image:: https://github.com/vjankraemer/sil-kit-ci/actions/workflows/linux-tsan.yml/badge.svg
+   :target: https://github.com/vjankraemer/sil-kit-ci/actions/workflows/linux-tsan.yml
+.. |WinBadge| image:: https://github.com/vjankraemer/sil-kit-ci/actions/workflows/build-win.yml/badge.svg
+   :target: https://github.com/vjankraemer/sil-kit-ci/actions/workflows/build-win.yml
 | |ReleaseBadge| |LicenseBadge| |DocsBadge| 
 | |AsanBadge| |UbsanBadge| |TsanBadge| |WinBadge| 
 
