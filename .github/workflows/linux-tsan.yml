@@ -1,4 +1,4 @@
-name: 'Linux Clang14 Thread Sanitizer'
+name: 'Linux TSAN'
 on:
   workflow_call:
 

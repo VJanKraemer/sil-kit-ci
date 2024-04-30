@@ -1,4 +1,4 @@
-name: 'Linux Clang14 Undefined Behaviour Sanitizer'
+name: 'Linux UBSAN'
 on:
   workflow_call:
 

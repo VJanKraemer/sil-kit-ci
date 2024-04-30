@@ -1,4 +1,4 @@
-name: 'Linux Clang14 Address Sanitizer'
+name: 'Linux ASAN'
 on:
   workflow_call:
 
