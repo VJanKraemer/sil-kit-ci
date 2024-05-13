@@ -8,8 +8,8 @@ The Vector SIL Kit
 .. |DocsBadge| image:: https://img.shields.io/badge/documentation-html-blue.svg
    :target: https://vectorgrp.github.io/sil-kit-docs
 
-.. |AsanBadge| image:: https://github.com/vectorgrp/sil-kit/actions/workflows/linux-asan.yml/badge.svg
-   :target: https://github.com/vectorgrp/sil-kit/actions/workflows/linux-asan.yml
+.. |AsanBadge| image:: https://github.com/vjankraemer/sil-kit-ci/actions/workflows/linux-asan.yml/badge.svg
+   :target: https://github.com/vjankraemer/sil-kit-ci/actions/workflows/linux-asan.yml?branch=check_badges
 .. |UbsanBadge| image:: https://github.com/vectorgrp/sil-kit/actions/workflows/linux-ubsan.yml/badge.svg
    :target: https://github.com/vectorgrp/sil-kit/actions/workflows/linux-ubsan.yml
 .. |TsanBadge| image:: https://github.com/vectorgrp/sil-kit/actions/workflows/linux-tsan.yml/badge.svg
