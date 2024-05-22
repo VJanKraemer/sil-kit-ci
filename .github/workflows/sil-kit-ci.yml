@@ -43,35 +43,36 @@ jobs:
   clang14-tsan:
     name: Thread Sanitizer Tests
     needs: [check-licenses, check-files-changed]
-    if: needs.check-files-changed.outputs.run_builds == 'true'
     uses: ./.github/workflows/linux-tsan.yml
+    with:
+      run_build: ${{ needs.check-files-changed.outputs.run_builds == 'true' }}
 
   clang14-ubsan:
     name: Undefined Behavior Sanitizer Tests
     needs: [check-licenses, check-files-changed]
-    if: needs.check-files-changed.outputs.run_builds == 'true'
     uses: ./.github/workflows/linux-ubsan.yml
+    with:
+      run_build: ${{ needs.check-files-changed.outputs.run_builds == 'true' }}
 
   clang14-asan:
     name: Address Sanitizer Tests
     needs: [check-licenses, check-files-changed]
-    if: needs.check-files-changed.outputs.run_builds == 'true'
     uses: ./.github/workflows/linux-asan.yml
+    with:
+      run_build: ${{ needs.check-files-changed.outputs.run_builds == 'true' }}
 
   ubuntu-release-builds:
     uses: ./.github/workflows/build-linux.yml
     needs: [check-licenses, check-files-changed]
-    if: needs.check-files-changed.outputs.run_builds == 'true'
     with:
       do_package: ${{ github.event_name == 'push' && true || false }}
       retention_days: ${{ github.event_name == 'push' && 90 || 14 }}
+      run_build: ${{ needs.check-files-changed.outputs.run_builds == 'true' }}
 
   windows-release-builds:
     uses: ./.github/workflows/build-win.yml
     needs: [check-licenses, check-files-changed]
-    if: needs.check-files-changed.outputs.run_builds == 'true'
     with:
       do_package: ${{ github.event_name == 'push' && true || false }}
       retention_days: ${{ github.event_name == 'push' && 90 || 14 }}
-
-
+      run_build: ${{ needs.check-files-changed.outputs.run_builds == 'true' }}
