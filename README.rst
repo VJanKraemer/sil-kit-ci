@@ -128,7 +128,7 @@ There are also specific options to toggle details of the build:
     4. SILKIT_BUILD_UTILITIES=OFF (default: ON) disables the generation of utility tools
        (sil-kit-registry, sil-kit-system-controller and sil-kit-monitor).
 
-For example, if you want to build the SIL Kit with documentation enabled,
+For example, if you want to additionally build the SIL Kit documentation,
 call CMake in your build directory as follows::
 
     pip3 install -r SilKit/ci/docker/docs_requirements.txt
