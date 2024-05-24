@@ -3,12 +3,6 @@ name: "CI for Pull Requests"
 on:
   pull_request:
     branches: [ 'public_ci' ]
-    paths-ignore:
-      - 'README.rst'
-      - 'CONTRIBUTING.md'
-      - 'LICENSE'
-      - 'SECURITY.md'
-      - 'SilKit/CHANGELOG.md'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -33,32 +27,51 @@ jobs:
           sh ./SilKit/ci/check_licenses.sh
         shell: bash
 
+  check-files-changed:
+    runs-on: ubuntu-22.04
+    outputs:
+      run_builds: ${{ steps.job_status.outputs.run_builds }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+      - name: Check changed files
+        id: files_check
+        run: |
+          python3 ./SilKit/ci/check_files_changed.py ${{ github.repository }} ${{ github.event.number }}
+
   clang14-tsan:
     name: Thread Sanitizer Tests
-    needs: check-licenses
+    needs: [check-licenses, check-files-changed]
+    if: needs.check-files-changed.outputs.run_builds == 'true'
     uses: ./.github/workflows/linux-tsan.yml
 
   clang14-ubsan:
     name: Undefined Behavior Sanitizer Tests
-    needs: check-licenses
+    needs: [check-licenses, check-files-changed]
+    if: needs.check-files-changed.outputs.run_builds == 'true'
     uses: ./.github/workflows/linux-ubsan.yml
 
   clang14-asan:
     name: Address Sanitizer Tests
-    needs: check-licenses
+    needs: [check-licenses, check-files-changed]
+    if: needs.check-files-changed.outputs.run_builds == 'true'
     uses: ./.github/workflows/linux-asan.yml
 
   ubuntu-release-builds:
     uses: ./.github/workflows/build-linux.yml
-    needs: check-licenses
+    needs: [check-licenses, check-files-changed]
+    if: needs.check-files-changed.outputs.run_builds == 'true'
     with:
       do_package: ${{ github.event_name == 'push' && true || false }}
       retention_days: ${{ github.event_name == 'push' && 90 || 14 }}
 
   windows-release-builds:
     uses: ./.github/workflows/build-win.yml
-    needs: check-licenses
+    needs: [check-licenses, check-files-changed]
+    if: needs.check-files-changed.outputs.run_builds == 'true'
     with:
       do_package: ${{ github.event_name == 'push' && true || false }}
       retention_days: ${{ github.event_name == 'push' && 90 || 14 }}
+
 
