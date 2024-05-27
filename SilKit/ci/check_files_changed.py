@@ -58,5 +58,6 @@ for fileObject in r.json():
 log("Builds should run: {}".format(run_builds))
 
 if isCI != None:
-    with open(os.getenv("GITHUB_OUTPUT"), 'a') as f:
-        print("{}={}".format("run_builds", run_builds), file=f)
+    log("Setting output!")
+    with open(os.environ["GITHUB_OUTPUT"], 'a') as f:
+        print("run_builds={}".format(run_builds), file=f)

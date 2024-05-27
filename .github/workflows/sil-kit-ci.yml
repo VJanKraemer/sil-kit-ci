@@ -30,7 +30,7 @@ jobs:
   check-files-changed:
     runs-on: ubuntu-22.04
     outputs:
-      run_builds: ${{ steps.job_status.outputs.run_builds }}
+      run_builds: ${{ steps.files_check.outputs.run_builds }}
     steps:
       - uses: actions/checkout@v4
         with:
