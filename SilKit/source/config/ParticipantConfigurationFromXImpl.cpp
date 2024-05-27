@@ -49,8 +49,8 @@ using ConfigInclude = std::pair<std::string, SilKit::Config::v1::ParticipantConf
 struct MiddlewareCache
 {
     std::vector<std::string> acceptorUris;
-    SilKit::Util::Optional<std::string> registryUri;
-    SilKit::Util::Optional<double> connectTimeoutSeconds;
+    SilKit::Util::Optional<std::string> registryUri
+    SilKit::Util::Optional<double> connectTimeoutSeconds
     SilKit::Util::Optional<int> connectAttempts;
     SilKit::Util::Optional<int> tcpReceiveBufferSize;
     SilKit::Util::Optional<int> tcpSendBufferSize;
