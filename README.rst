@@ -19,8 +19,8 @@ The Vector SIL Kit
 | |ReleaseBadge| |LicenseBadge| |DocsBadge| 
 | |AsanBadge| |UbsanBadge| |TsanBadge| |WinBadge| 
 
-The Vector SIL Kit is an open-source library for connecting Software-in-the-Loop Environments.
-This README is intended to provide you with quick start on how to build the Vector SIL Kit.
+The Vector SIL Kit is an open-source library for connecting your Software-in-the-Loop Environments.
+This README is intended to provide you with a quick start on how to build the Vector SIL Kit.
 
 For documentation on using the Vector SIL Kit, see the HTML documentation,
 which can be generated when building the Vector SIL Kit (cf. Customizing the
