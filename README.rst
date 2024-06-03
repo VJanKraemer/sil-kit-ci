@@ -19,8 +19,8 @@ The Vector SIL Kit
 | |ReleaseBadge| |LicenseBadge| |DocsBadge| 
 | |AsanBadge| |UbsanBadge| |TsanBadge| |WinBadge| 
 
-The Vector SIL Kit is an open-source library for connecting Software-in-the-Loop Environments.
-This README is intended to provide you with quick start on how to build the Vector SIL Kit.
+The Vector SIL Kit is an open-source library for connecting your Software-in-the-Loop Environments.
+This README is intended to provide you with a quick start on how to build the Vector SIL Kit.
 
 For documentation on using the Vector SIL Kit, see the HTML documentation,
 which can be generated when building the Vector SIL Kit (cf. Customizing the
@@ -128,7 +128,7 @@ There are also specific options to toggle details of the build:
     4. SILKIT_BUILD_UTILITIES=OFF (default: ON) disables the generation of utility tools
        (sil-kit-registry, sil-kit-system-controller and sil-kit-monitor).
 
-For example, if you want to build the SIL Kit with documentation enabled,
+For example, if you want to additionally build the SIL Kit documentation,
 call CMake in your build directory as follows::
 
     pip3 install -r SilKit/ci/docker/docs_requirements.txt
