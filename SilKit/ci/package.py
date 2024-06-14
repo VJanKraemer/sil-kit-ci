@@ -179,7 +179,7 @@ def parseArgs():
             die(1, "zip file does not exist: {}", cpack)
         else:
             files.append(cpack)
-    if len(files) != len(build_types):
+    if len(files) > len(build_types):
         die(2, "sanity check failed: more cpack files than supported build types"
         " given as argument (expected: {}). arguments: {} ".format(build_types, files))
     if not isCompatibleCpack(files[0], files[1]):

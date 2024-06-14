@@ -62,6 +62,38 @@ jobs:
         debug-package-name: ${{needs.gcc8-debug.outputs.package-name}}
         release-package-name: ${{needs.gcc8-release.outputs.package-name}}
 
+  gcc10-release:
+    environment: public-github-runners
+    runs-on: ubuntu-20.04
+    outputs:
+        package-name: ${{ steps.build.outputs.package-name}}
+    steps:
+    - name: git checkout
+      uses: actions/checkout@v4
+      with:
+        submodules: true
+    - name: gcc10-release build
+      uses: ./.github/actions/build-cmake-preset
+      id: build
+      with:
+        preset-name: gcc-release
+        cmake-args: -D SILKIT_INSTALL_SOURCE=ON
+        do-package: true
+        run-tests: true
+
+  gcc10-package:
+    needs: [ gcc10-release]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        sparse-checkout: |
+         .github
+         SilKit/ci/package.py
+    - uses: ./.github/actions/make-package
+      with:
+        release-package-name: ${{needs.gcc8-release.outputs.package-name}}
+
   vs141-x86-release:
     environment: public-github-runners
     runs-on: windows-latest
