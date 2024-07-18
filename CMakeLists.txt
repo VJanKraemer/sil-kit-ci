@@ -48,6 +48,7 @@ option(SILKIT_LINK_LLD "Use the lld linker for SIL KIT" OFF)
 option(SILKIT_USE_SYSTEM_LIBRARIES "Use the libraries installed on the system for third party dependencies" OFF)
 option(SILKIT_BUILD_REPRODUCIBLE "Creates a reproducible build by ommiting timestamps/unique build ids" ON)
 option(SILKIT_BUILD_LINUX_PACKAGE "Creates SILKIT builds suitable for package managers in Linux Distributions (.deb)" OFF)
+option(SILKIT_VENDORED_PACKAGE "Use upstream dependencies instead of system dependencies" OFF)
 
 if(SILKIT_BUILD_LINUX_PACKAGE)
 
@@ -56,8 +57,10 @@ if(SILKIT_BUILD_LINUX_PACKAGE)
     message(NOTICE "  * SILKIT_BUILD_REPRODUCIBLE   OFF")
     set(SILKIT_BUILD_REPRODUCIBLE OFF CACHE BOOL "Force SILKIT_BUILD_REPRODUCIBLE OFF due to SILKIT_BUILD_LINUX_PACKAGE" FORCE)
 
-    message(NOTICE "  * SILKIT_USE_SYSTEM_LIBRARIES ON")
-    set(SILKIT_USE_SYSTEM_LIBRARIES ON CACHE BOOL "Force SILKIT_USE_SYSTEM_LIBRARIES ON due to SILKIT_BUILD_LINUX_PACKAGE" FORCE)
+    if(NOT SILKIT_VENDORED_PACKAGE)
+        message(NOTICE "  * SILKIT_USE_SYSTEM_LIBRARIES ON")
+        set(SILKIT_USE_SYSTEM_LIBRARIES ON CACHE BOOL "Force SILKIT_USE_SYSTEM_LIBRARIES ON due to SILKIT_BUILD_LINUX_PACKAGE" FORCE)
+    endif()
 
     message(NOTICE "  * SILKIT_BUILD_DASHBOARD      OFF")
     set(SILKIT_BUILD_DASHBOARD OFF CACHE BOOL "Force SILKIT_BUILD_DASHBOARD OFF due to SILKIT_BUILD_REPRODUCIBLE" FORCE)
