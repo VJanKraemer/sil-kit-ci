@@ -6,9 +6,23 @@ All notable changes to the Vector SIL Kit project shall be documented in this fi
 
 The format is based on `Keep a Changelog (http://keepachangelog.com/en/1.0.0/) <http://keepachangelog.com/en/1.0.0/>`_.
 
-[4.0.52] - UNRELEASED 
+[unreleased]
 ---------------------
 
+
+[4.0.52] - 2024-09-02 
+---------------------
+
+Fixed
+~~~~~
+
+- Fixed crash in ``sil-kit-registry`` utility that happened when the dashboard is enabled, but not actually available.
+
+Added
+~~~~~
+
+- Message aggregation for simulations with time synchronization.
+  Accessible via the experimental section in the Participant Configuration (Experimental | TimeSynchronization | EnableMessageAggregation).
 
 
 [4.0.51] - 2024-07-18 

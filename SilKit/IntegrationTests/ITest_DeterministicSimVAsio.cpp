@@ -36,8 +36,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-#include "GetTestPid.hpp"
-
 namespace {
 
 using namespace std::chrono;
@@ -157,9 +155,8 @@ public:
             });
         }
 
-        timeSyncService->SetSimulationStepHandler([this](const nanoseconds now, nanoseconds /*duration*/) {
-            _currentTick = now;
-        }, period);
+        timeSyncService->SetSimulationStepHandler(
+            [this](const nanoseconds now, nanoseconds /*duration*/) { _currentTick = now; }, period);
     }
 
     std::future<ParticipantState> RunAsync() const
@@ -236,13 +233,7 @@ private:
 class ITest_DeterministicSimVAsio : public testing::Test
 {
 protected:
-    ITest_DeterministicSimVAsio()
-    {
-        registryUri = MakeTestRegistryUri();
-    }
-
-protected:
-    std::string registryUri;
+    ITest_DeterministicSimVAsio() = default;
 };
 
 TEST_F(ITest_DeterministicSimVAsio, deterministic_simulation_vasio)
@@ -259,7 +250,7 @@ TEST_F(ITest_DeterministicSimVAsio, deterministic_simulation_vasio)
 
     auto registry =
         SilKit::Vendor::Vector::CreateSilKitRegistry(SilKit::Config::ParticipantConfigurationFromString(""));
-    registry->StartListening(registryUri);
+    auto registryUri = registry->StartListening("silkit://localhost:0");
 
     // The subscriber assumes the role of the system controller and initiates simulation state changes
     Subscriber subscriber(subscriberName, registryUri, publisherCount, testSize);

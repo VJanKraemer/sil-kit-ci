@@ -32,11 +32,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 #include "IVAsioPeer.hpp"
 #include "EndpointAddress.hpp"
 #include "MessageBuffer.hpp"
+#include "RingBuffer.hpp"
 #include "VAsioPeerInfo.hpp"
 #include "ProtocolVersion.hpp"
 
 #include "IIoContext.hpp"
 #include "IRawByteStream.hpp"
+#include "ITimer.hpp"
 
 
 namespace SilKit {
@@ -46,6 +48,7 @@ namespace Core {
 class VAsioPeer
     : public IVAsioPeer
     , private IRawByteStreamListener
+    , private ITimerListener
 {
 public:
     // ----------------------------------------
@@ -92,6 +95,8 @@ public:
 
     void Shutdown() override;
 
+    void EnableAggregation() override;
+
 private:
     // ----------------------------------------
     // Private Methods
@@ -99,11 +104,17 @@ private:
     void WriteSomeAsync();
     void ReadSomeAsync();
     void DispatchBuffer();
+    void SendSilKitMsgInternal(std::vector<uint8_t> blob);
+    void Aggregate(const std::vector<uint8_t>& blob);
+    void Flush();
 
 private: // IRawByteStreamListener
     void OnAsyncReadSomeDone(IRawByteStream& stream, size_t bytesTransferred) override;
     void OnAsyncWriteSomeDone(IRawByteStream& stream, size_t bytesTransferred) override;
     void OnShutdown(IRawByteStream& stream) override;
+
+    // ITimerListener
+    void OnTimerExpired(ITimer& timer) override;
 
 private:
     // ----------------------------------------
@@ -121,18 +132,26 @@ private:
 
     // receiving
     std::atomic<uint32_t> _currentMsgSize{0u};
-    std::vector<uint8_t> _msgBuffer;
-    size_t _wPos{0};
-    MutableBuffer _currentReceivingBuffer;
+    RingBuffer _msgBuffer;
+    std::vector<MutableBuffer> _currentReceivingBuffers;
 
     // sending
     mutable std::mutex _sendingQueueMutex;
     std::deque<std::vector<uint8_t>> _sendingQueue;
     ConstBuffer _currentSendingBuffer;
     std::vector<uint8_t> _currentSendingBufferData;
+    std::vector<uint8_t> _aggregatedMessages;
 
     std::atomic_bool _sending{false};
     Core::ServiceDescriptor _serviceDescriptor;
+
+    bool _useAggregation{false};
+    const size_t _aggregationBufferThreshold{100 * 1000};
+
+    // we trigger a flush of aggregated messages, if too much time has passed since the last flush
+    std::unique_ptr<ITimer> _flushTimer;
+    const std::chrono::milliseconds _flushTimeout{50};
+    bool _initialTimerStarted{false};
 };
 
 // ================================================================================
