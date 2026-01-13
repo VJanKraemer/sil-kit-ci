@@ -20,9 +20,9 @@ jobs:
     steps:
 
       - name: Trigger Workflow
+        id: trigger-workflow
         env:
           GH_TOKEN: ${{ github.secrets.PAT_REPOSITORY_DISPATCH }}
-        id: trigger-workflow
         run: |
            repo_owner=${{ inputs.repo_owner }}
            repo_name=${{ inputs.repo_name }}
