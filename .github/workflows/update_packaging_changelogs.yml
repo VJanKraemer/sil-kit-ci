@@ -26,7 +26,7 @@ jobs:
            repo_name=${{ github.events.inputs.repo_name }}
 
            echo $repo_owner
-           ech $repo_name
+           echo $repo_name
 
            gh workflow run remote_workflow.yaml \
            --repo ${{ github.secrets.REMOTE_REPO }} \
