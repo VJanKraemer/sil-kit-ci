@@ -32,6 +32,6 @@ jobs:
 
            gh workflow run remote_workflow.yaml \
            --repo ${{ github.secrets.REMOTE_REPO }} \
-           --branch main \
+           --ref main \
            -f world=mars
 
