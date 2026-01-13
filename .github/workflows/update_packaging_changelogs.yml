@@ -3,77 +3,31 @@ name: Update Docs
 on:
 
   workflow_dispatch:
-
     inputs:
-
-      author:
-        type: string
-        description: Name of the author/developer creating the release
+      repo_owner:
         required: true
-
-      email:
-        type: string
-        description: The Email of the developer creating the release
+      repo_name:
         required: true
 
 
 jobs:
 
-  update-docs:
-    name: Update Changelogs
+  trigger-ci:
+    name: Trigger CI
 
     runs-on: ubuntu-latest
 
     steps:
 
-      - name: Create App Auth Token
-        id: create-token
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ vars.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-          owner: vectorgrp
-          repo: sil-kit-pkg
-
-      - name: Checkout (sil-kit)
-        uses: actions/checkout@v4
-        with:
-          repository: vjankraemer/sil-kit-ci
-
-      - name: Checkout (sil-kit-pkg)
-        uses: actions/checkout@v4
-        with:
-          repository: vectorgrp/sil-kit-pkg
-          github-server-url: https://github.com
-          path: sil-kit-pkg
-          token: ${{ secrets.GHP_TOKEN }}
-
-      - name: Copy Changelogs
-        id: copy_changelogs
+      - name: Trigger Workflow
+        id: trigger-workflow
         run: |
-          cd ${{ github.workspace }}/SilKit/ci
-          python3 chaparone.py "${{ inputs.author }}" "${{ inputs.email }}" ${{ github.workspace }}/sil-kit-pkg
-
-      - name: Push to sil-kit-pkg
-        run: |
-          cd ${{ github.workspace }}/sil-kit-pkg
-
-          git config user.name ${{ inputs.author }}
-          git config user.email ${{ inputs.email }}
-          git switch -c update_to_${{ steps.copy_changelogs.outputs.silkit_version }}
-          git add debian/changelog rpm/libsilkit5.spec
-          git commit -s -m "changelog: Update to ${{ steps.copy_changelogs.outputs.silkit_version }}"
-          git push --force https://x-access-token:${{steps.create_token.outputs.token }}@github.com/vectorgrp/sil-kit-pkg update_to_${{ steps.copy_changelogs.outputs.silkit_version }}:update_to_${{ steps.copy_changelogs.outputs.silkit_version }}
-
-      - name: Create PR
-        env:
-          GH_TOKEN: ${{ secrets.GHP_TOKEN }}
-        run: |
-          cd ${{ github.workspace }}/sil-kit-pkg
-          git log --oneline
-          gh pr create \
-           -B main \
-           -H update_to_${{ steps.copy_changelogs.outputs.silkit_version }} \
-           -f \
-           -t "Update the changelogs" \
-
+           repo_owner = ${{ github.events.inputs.repo_owner }}
+           repo_name = ${{ github.events.inputs.repo_name }}
+           curl \
+            --request POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.PAT }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/$repo_owner/$repo_name/dispatches \
+           -d '{"event_type": "fancy_event", "client_payload": {"world": "Earth"}}'
