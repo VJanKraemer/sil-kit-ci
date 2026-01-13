@@ -22,8 +22,8 @@ jobs:
       - name: Trigger Workflow
         id: trigger-workflow
         run: |
-           repo_owner = ${{ github.events.inputs.repo_owner }}
-           repo_name = ${{ github.events.inputs.repo_name }}
+           repo_owner=${{ github.events.inputs.repo_owner }}
+           repo_name=${{ github.events.inputs.repo_name }}
            curl \
             --request POST \
             -H "Accept: application/vnd.github+json" \
