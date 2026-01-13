@@ -22,7 +22,7 @@ jobs:
       - name: Trigger Workflow
         id: trigger-workflow
         env:
-          GH_TOKEN: ${{ github.secrets.PAT }}
+          GH_TOKEN: ${{ github.token }}
         run: |
            repo_owner=${{ inputs.repo_owner }}
            repo_name=${{ inputs.repo_name }}
