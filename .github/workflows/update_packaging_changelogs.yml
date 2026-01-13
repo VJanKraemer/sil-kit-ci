@@ -22,7 +22,7 @@ jobs:
       - name: Trigger Workflow
         id: trigger-workflow
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.PAT }}
         run: |
            repo_owner=${{ inputs.repo_owner }}
            repo_name=${{ inputs.repo_name }}
@@ -31,7 +31,7 @@ jobs:
            echo $repo_name
 
            gh workflow run remote_workflow.yaml \
-           --repo ${{ github.secrets.REMOTE_REPO }} \
+           --repo ${{ secrets.REMOTE_REPO }} \
            --ref main \
            -f world=mars
 
