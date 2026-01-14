@@ -32,7 +32,7 @@ jobs:
              -w remote_workflow.yaml \
              --limit 1 \
              --json workflowDatabaseId \
-             -q '.[0].workflowDatabaseId' \
+             -q '.[0].databaseId' \
              --repo ${{ secrets.REMOTE_REPO }})
 
            echo "run_id=${run_id}" >> $GITHUB_OUTPUT
