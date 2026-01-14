@@ -31,7 +31,7 @@ jobs:
              run list \
              -w remote_workflow.yaml \
              --limit 1 \
-             --json workflowDatabaseId \
+             --json databaseId \
              -q '.[0].databaseId' \
              --repo ${{ secrets.REMOTE_REPO }})
 
