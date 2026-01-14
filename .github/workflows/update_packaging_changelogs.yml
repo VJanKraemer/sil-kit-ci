@@ -49,16 +49,16 @@ jobs:
           --exit-status \
           --repo ${{ secrets.REMOTE_REPO }}
 
-          ret=$(gh \
-            run view \
-            ${{ steps.trigger_workflow.outputs.run_id }} \
-            --json conclusion \
-            -q .conclusion \
-            --repo ${{ secrets.REMOTE_REPO }})
+          #ret=$(gh \
+          #  run view \
+          #  ${{ steps.trigger_workflow.outputs.run_id }} \
+          #  --json conclusion \
+          #  -q .conclusion \
+          #  --repo ${{ secrets.REMOTE_REPO }})
 
-          echo "Remote workflow exit status: $ret"
+          #echo "Remote workflow exit status: $ret"
 
-          if [ "$ret" != "sucess" ]; then
-            exit 1
-          fi
+          #if [ "$ret" != "sucess" ]; then
+          #  exit 1
+          #fi
 
