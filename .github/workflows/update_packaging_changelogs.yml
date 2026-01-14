@@ -40,8 +40,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PAT }}
         run: |
+          echo ${{ steps.trigger-workflow.outputs.run_id }}
+          echo ${{ steps.trigger_workflow.outputs.run_id }}
           gh run watch \
-          ${{ steps.trigger_workflow.outputs.run_id }} \
+          ${{ steps.trigger-workflow.outputs.run_id }} \
+          --interval 3 \
+          --compact \
+          --exit-status \
           --repo ${{ secrets.REMOTE_REPO }}
 
           ret=$(gh \
