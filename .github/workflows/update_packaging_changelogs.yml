@@ -24,6 +24,8 @@ jobs:
            --ref main \
            -f world=mars
 
+           sleep 5
+
            # Get the ID of the workflow by checking the latest run(ning) workflow
            run_id=$(gh \
              run list \
@@ -41,7 +43,6 @@ jobs:
           GH_TOKEN: ${{ secrets.PAT }}
         run: |
           echo ${{ steps.trigger-workflow.outputs.run_id }}
-          echo ${{ steps.trigger_workflow.outputs.run_id }}
           gh run watch \
           ${{ steps.trigger-workflow.outputs.run_id }} \
           --interval 3 \
