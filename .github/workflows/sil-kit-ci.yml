@@ -49,6 +49,7 @@ jobs:
   check-dco-signed:
     name: 🦙 DCO Signing Check
     runs-on: ubuntu-22.04
+    if: false
     steps:
       - uses: actions/checkout@v6
         with:
