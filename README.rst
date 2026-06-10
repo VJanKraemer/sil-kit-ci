@@ -29,7 +29,7 @@ The SIL Kit Project
 | |VectorSite| |SynopsysSite|
 
 The SIL Kit is an open-source library for connecting Software-in-the-Loop Environments.
-This README is intended to provide you with quick start on how to build the SIL Kit.
+This README is intended to provide you with quick start on how to build the SIL Kit!
 
 For documentation on using the SIL Kit, see the HTML documentation,
 which can be generated when building the SIL Kit (cf. Customizing the
