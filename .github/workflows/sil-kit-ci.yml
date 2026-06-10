@@ -2,7 +2,7 @@ name: "CI for Pull Requests"
 
 on:
   pull_request:
-    branches: [ 'main' ]
+    branches: [ 'test_gh_actions' ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
